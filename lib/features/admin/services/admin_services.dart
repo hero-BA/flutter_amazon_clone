@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter_amazon_clone/constants/error_handling.dart';
@@ -61,5 +62,36 @@ class AdminServices {
     } catch (err) {
       showSnackBar(context, err.toString());
     }
+  }
+
+  // Get all the products
+  Future<List<Product>> fetchAllProducts(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Product> productList = [];
+
+    try {
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/get-products'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token
+      });
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: (() {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            productList.add(
+              Product.fromJson(
+                jsonEncode(jsonDecode(res.body)[i]),
+              ),
+            );
+          }
+        }),
+      );
+    } catch (err) {
+      showSnackBar(context, err.toString());
+    }
+    return productList;
   }
 }
