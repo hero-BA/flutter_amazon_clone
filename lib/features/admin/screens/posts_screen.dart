@@ -27,6 +27,18 @@ class _PostsScreenState extends State<PostsScreen> {
     setState(() {});
   }
 
+  void deleteProduct(Product product, int index) {
+    adminServices.deleteProduct(
+      context: context,
+      product: product,
+      onSuccess: () {
+        products!.removeAt(index);
+        // To reflect changes on the screen, so we need the build function to rebuild again. Thats why we call setState
+        setState(() {});
+      },
+    );
+  }
+
   void navigateToAddProduct() {
     Navigator.pushNamed(context, AddProductScreen.routeName);
   }
@@ -61,7 +73,7 @@ class _PostsScreenState extends State<PostsScreen> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () => deleteProduct(productData, index),
                           icon: const Icon(Icons.delete_outline),
                         ),
                       ],
