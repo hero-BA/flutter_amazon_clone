@@ -62,21 +62,27 @@ class _PostsScreenState extends State<PostsScreen> {
                         image: productData.images[0],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            productData.name,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                    // Fixed text positioning
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 15,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              productData.name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () => deleteProduct(productData, index),
-                          icon: const Icon(Icons.delete_outline),
-                        ),
-                      ],
+                          IconButton(
+                            onPressed: () => deleteProduct(productData, index),
+                            icon: const Icon(Icons.delete_outline),
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 );
