@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter_amazon_clone/models/rating.dart';
+
 class Product {
   final String name;
   final String description;
@@ -9,7 +11,7 @@ class Product {
   final double price;
   // Can be nullable, and this we are not storing right now while sending data to our server, but we will store when we get data from our server.
   final String? id;
-  // Rating
+  final List<Rating>? rating;
 
   Product({
     required this.name,
@@ -19,6 +21,7 @@ class Product {
     required this.category,
     required this.price,
     this.id,
+    this.rating,
   });
 
   Map<String, dynamic> toMap() {
@@ -30,6 +33,7 @@ class Product {
       'category': category,
       'price': price,
       'id': id,
+      'rating': rating,
     };
   }
 
@@ -42,6 +46,13 @@ class Product {
       category: map['category'] ?? '',
       price: map['price']?.toDouble() ?? 0.0,
       id: map['_id'],
+      rating: map['ratings'] != null
+          ? List<Rating>.from(
+              map['ratings']?.map(
+                (x) => Rating.fromMap(x),
+              ),
+            )
+          : null,
     );
   }
 
