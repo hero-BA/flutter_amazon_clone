@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/features/admin/screens/posts_screen.dart';
-
 import '../../../constants/global_variables.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -101,18 +100,21 @@ class _AdminScreenState extends State<AdminScreen> {
               label: ''),
           // Orders
           BottomNavigationBarItem(
-              icon: Container(
-                width: bottomBarWidth,
-                decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                            color: _page == 2
-                                ? GlobalVariables.selectedNavBarColor
-                                : GlobalVariables.backgroundColor,
-                            width: bottomBarBorderWidth))),
-                child: const Icon(Icons.all_inbox_outlined),
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                      color: _page == 2
+                          ? GlobalVariables.selectedNavBarColor
+                          : GlobalVariables.backgroundColor,
+                      width: bottomBarBorderWidth),
+                ),
               ),
-              label: ''),
+              child: const Icon(Icons.all_inbox_outlined),
+            ),
+            label: '',
+          ),
         ],
       ),
     );

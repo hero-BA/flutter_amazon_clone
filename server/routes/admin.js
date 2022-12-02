@@ -22,7 +22,7 @@ adminRouter.post("/admin/add-product", admin, async (req, res) => {
   }
 });
 
-// Get all your product
+// Get all products
 adminRouter.get("/admin/get-products", admin, async (req, res) => {
   try {
     const products = await Product.find({});
