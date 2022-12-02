@@ -3,6 +3,7 @@ const productRouter = express.Router();
 const auth = require("../middlewares/auth");
 const Product = require("../models/product");
 
+// Get Products
 productRouter.get("/api/products", auth, async (req, res) => {
   try {
     const products = await Product.find({ category: req.query.category });
@@ -12,6 +13,7 @@ productRouter.get("/api/products", auth, async (req, res) => {
   }
 });
 
+// Get searched products
 productRouter.get("/api/products/search/:name", auth, async (req, res) => {
   try {
     const products = await Product.find({
@@ -44,6 +46,33 @@ productRouter.post("/api/rate-product", auth, async (req, res) => {
     product.ratings.push(ratingSchema);
     product = await product.save();
     res.json(product);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get Deal of the Day
+productRouter.get("/api/deal-of-day", auth, async (req, res) => {
+  try {
+    // Getting all the products
+    let products = await Product.find({});
+    // Sort all products in descending order and check which has the biggest rating
+    products = products.sort((a, b) => {
+      let aSum = 0;
+      let bSum = 0;
+
+      for (let i = 0; i < a.ratings.length; i++) {
+        aSum += a.ratings[i].rating;
+      }
+
+      for (let i = 0; i < b.ratings.length; i++) {
+        bSum += b.ratings[i].rating;
+      }
+
+      return aSum < bSum ? 1 : -1;
+    });
+
+    res.json(products[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
