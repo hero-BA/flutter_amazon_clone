@@ -4,7 +4,6 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter_amazon_clone/constants/error_handling.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:flutter_amazon_clone/constants/utils.dart';
-import 'package:flutter_amazon_clone/features/account/widgets/orders.dart';
 import 'package:flutter_amazon_clone/features/admin/models/sales.dart';
 import 'package:flutter_amazon_clone/models/order.dart';
 import 'package:flutter_amazon_clone/models/product.dart';
