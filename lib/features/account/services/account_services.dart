@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/error_handling.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:flutter_amazon_clone/constants/utils.dart';
-import 'package:flutter_amazon_clone/models/orders.dart';
+import 'package:flutter_amazon_clone/models/order.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;

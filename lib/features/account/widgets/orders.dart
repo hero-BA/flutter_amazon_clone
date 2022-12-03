@@ -3,7 +3,8 @@ import 'package:flutter_amazon_clone/common/widgets/loader.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:flutter_amazon_clone/features/account/services/account_services.dart';
 import 'package:flutter_amazon_clone/features/account/widgets/single_product.dart';
-import 'package:flutter_amazon_clone/models/orders.dart';
+import 'package:flutter_amazon_clone/features/order_details/screens/order_details.dart';
+import 'package:flutter_amazon_clone/models/order.dart';
 
 class Orders extends StatefulWidget {
   const Orders({super.key});
@@ -54,16 +55,27 @@ class _OrdersState extends State<Orders> {
                   ),
                 ],
               ),
-              // Display products
+              // Display orders
               Container(
                 height: 170,
-                padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  top: 20,
+                  right: 0,
+                ),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: orders!.length,
                   itemBuilder: (context, index) {
-                    return SingleProduct(
-                      image: orders![index].products[0].images[0],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, OrderDetailsScreen.routeName,
+                            arguments: orders![index]);
+                      },
+                      child: SingleProduct(
+                        image: orders![index].products[0].images[0],
+                      ),
                     );
                   },
                 ),
